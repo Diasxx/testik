@@ -1,11 +1,11 @@
-# Используем официальный образ JDK 21
+# Используем официальный JDK 21
 FROM eclipse-temurin:21-jdk
 
-# Указываем, что jar-файл будет собран в папке target
-ARG JAR_FILE=target/*.jar
+# Указываем путь к .jar файлу (build должен быть выполнен до этого!)
+ARG JAR_FILE=target/deploy-0.0.1-SNAPSHOT.jar
 
-# Копируем jar в образ
+# Копируем .jar файл внутрь контейнера
 COPY ${JAR_FILE} app.jar
 
-# Запускаем приложение
-ENTRYPOINT ["java", "-jar", "deploy-0.0.1-SNAPSHOT.jar"]
+# Указываем команду запуска приложения
+ENTRYPOINT ["java", "-jar", "/app.jar"]
